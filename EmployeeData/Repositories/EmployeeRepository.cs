@@ -29,6 +29,7 @@ namespace EmployeeData.Repositories
                 s => s.SkillId,
                 (e, s) => new EmployeeSkillDTO
                 {
+                    EmployeeSkillId = e.EmployeeSkillId,
                     EmployeeId = e.EmployeeId,
                     SkillId = s.SkillId,
                     Description = s.Description

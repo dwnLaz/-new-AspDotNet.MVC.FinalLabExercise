@@ -52,27 +52,9 @@ namespace EmployeeWeb.Controllers
                     employeeRepository.Insert(employee);
                 }
                 else if (action.ToLower().Equals("edit"))
-                {
-                    //if (!string.IsNullOrEmpty(addSkill))
-                    //{
-                    //    var skill = new Skill
-                    //    {
-                    //        Description = addSkill,
-                    //    };
-                    //    Skill addedSkill = skillRepository.Insert(skill);
-                    //    skillRepository.Save();
-                    //    var employeeSkill = new EmployeeSkill
-                    //    {
-                    //        EmployeeId = employee.EmployeeId,
-                    //        SkillId = addedSkill.SkillId
-                    //    };
-                    //    employeeSkillRepository.Insert(employeeSkill);
-                    //    employeeSkillRepository.Save();
-                    //}                    
+                {            
                     employeeRepository.Update(employee);
-                    //return RedirectToAction("Edit", new { id = employee.EmployeeId });
                 }
-                employeeRepository.Save();
                 return RedirectToAction("Index");
             }
             else
@@ -92,14 +74,12 @@ namespace EmployeeWeb.Controllers
                     Description = addSkill,
                 };
                 Skill addedSkill = skillRepository.Insert(skill);
-                skillRepository.Save();
                 var employeeSkill = new EmployeeSkill
                 {
                     EmployeeId = employee.EmployeeId,
                     SkillId = addedSkill.SkillId
                 };
                 employeeSkillRepository.Insert(employeeSkill);
-                employeeSkillRepository.Save();
             }
             return RedirectToAction("Edit", new { id = employee.EmployeeId });
         }

@@ -16,8 +16,6 @@ namespace EmployeeData.Repositories
         T Insert(T entity);
         T Update(T entity);
 
-        int Save();
-
         EmployeeDbContext Context { get; set; }
     }
 
@@ -64,11 +62,6 @@ namespace EmployeeData.Repositories
             this.Context.Entry<T>(entity).State = EntityState.Modified;
             this.Context.SaveChanges();
             return entity;
-        }
-
-        public int Save()
-        {
-            return this.Context.SaveChanges();
         }
     }
 }

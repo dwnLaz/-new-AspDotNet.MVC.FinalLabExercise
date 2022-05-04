@@ -39,9 +39,11 @@
             <button value="Add"  class="btn btn-primary" asp-action="AddNewSkill">Add Skill</button>
         </div>
     </div>
-@*    <label for="addSkill">Add Skill:</label>
+
+    @*<label for="addSkill">Add Skill:</label>
     <input type="text" id="addSkill" name="addSkill">
     <button value="Add"  class="btn btn-primary" asp-action="AddNewSkill">Add Skill</button>*@
+
     <br/>
     <br/>
     <button type="submit" value="Save" class="btn btn-primary">Save</button>
@@ -52,11 +54,13 @@
         <table class="table">
             <tr>
                 <th>Skills</th>
+                <th></th>
             </tr>
             @foreach(EmployeeSkillDTO skill in ViewBag.Skills)
             {
                 <tr>
                     <td>@skill.Description</td>
+                    <td>@Html.ActionLink("Delete", "DeleteSkill", new {empSkillId=skill.EmployeeSkillId, empId=Model.EmployeeId})</td>
                 </tr>
             }
         </table>
