@@ -7,53 +7,60 @@
 <p>
     <a href='@Url.Action("New", "Employee")' class="btn btn-primary btn-sm">+New</a>
 </p>
-<form asp-action="Index" asp-controller="Employee" method="get">
-    <table class="table table-striped table-primary">
-        <tr>
-            <th scope="col">Employee Id</th>
-            <th scope="col"> First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Home Phone</th>
-            <td scope="col">Options</td>
-        </tr>
-        @foreach (var employee in Model.Results)
-        {
+@if(Model.PageCount > 0)
+{
+    <form asp-action="Index" asp-controller="Employee" method="get">
+        <table class="table table-striped table-primary">
             <tr>
-                <td scope="row">@employee.EmployeeId</td>
-                <td>@employee.FirstName</td>
-                <td>@employee.LastName</td>
-                <td>@employee.HomePhone</td>
-                @*<td>@employee.Active</td>*@
-                <td>
-                @Html.ActionLink("Edit", "Edit", new { id=employee.EmployeeId, action="edit" }) |
-                @Html.ActionLink("Delete", "Delete", new { id=employee.EmployeeId, page=Model.CurrentPage  })
-                </td>
+                <th scope="col">Employee Id</th>
+                <th scope="col"> First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Home Phone</th>
+                <td scope="col">Options</td>
             </tr>
-        }
-    </table>
-    <br />
-
-    <nav aria-label="Page navigation example">
-        <ul class="pagination">
-            @for (int pageIndex = 1; pageIndex <= Model.PageCount; pageIndex++)
+            @foreach (var employee in Model.Results)
             {
-
-                @if (pageIndex != Model.CurrentPage)
-                {
-
-                    <li class="page-item"><a class="page-link" href="javascript:pagerClick(@pageIndex);">@pageIndex</a></li>
-                }
-                else
-                {
-                    <li class="page-item active">
-                        <a class="page-link" href="#">@pageIndex <span class="sr-only">(current)</span></a>
-                    </li>
-                }
+                <tr>
+                    <td scope="row">@employee.EmployeeId</td>
+                    <td>@employee.FirstName</td>
+                    <td>@employee.LastName</td>
+                    <td>@employee.HomePhone</td>
+                    @*<td>@employee.Active</td>*@
+                    <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=employee.EmployeeId, action="edit" }) |
+                    @Html.ActionLink("Delete", "Delete", new { id=employee.EmployeeId, page=Model.CurrentPage  })
+                    </td>
+                </tr>
             }
-        </ul>
-    </nav>
-    <input type="hidden" id="page" name="page" />
-</form>
+        </table>
+        <br />
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                @for (int pageIndex = 1; pageIndex <= Model.PageCount; pageIndex++)
+                {
+
+                    @if (pageIndex != Model.CurrentPage)
+                    {
+
+                        <li class="page-item"><a class="page-link" href="javascript:pagerClick(@pageIndex);">@pageIndex</a></li>
+                    }
+                    else
+                    {
+                        <li class="page-item active">
+                            <a class="page-link" href="#">@pageIndex <span class="sr-only">(current)</span></a>
+                        </li>
+                    }
+                }
+            </ul>
+        </nav>
+        <input type="hidden" id="page" name="page" />
+    </form>
+}
+else
+{
+  <h3> No Employee Data</h3>  
+}
 <script type="text/javascript">
     function pagerClick(index) {
         document.getElementById("page").value = index;
