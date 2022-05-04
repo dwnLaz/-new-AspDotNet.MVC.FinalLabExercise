@@ -37,6 +37,8 @@ namespace EmployeeWeb
             var connectionString = Configuration.GetValue<string>("ConnectionString");
             services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IEmployeeSkillRepository, EmployeeSkillRepository>();
+            services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IEmployeeService, EmployeeService>();
         }
 

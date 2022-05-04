@@ -31,7 +31,14 @@
             <span asp-validation-for="HomePhone"></span>
         </div>
     </div>
-    <input asp-for="Active" class="form-control" type="hidden"/>
+    <input asp-for="Active" class="form-control" type="hidden"/>    
+    <label for="addSkill">Add Skill:</label>
+    <input type="text" id="addSkill" name="addSkill">
+    <br/>
+    <br/>
+    <button type="submit" value="Save" class="btn btn-primary">Save</button>
+    <br/>
+    <br/>
     @if (action != null && action.ToString().ToLower().Equals("edit"))
     {        
         <table class="table">
@@ -47,5 +54,4 @@
         </table>
     }
 
-    <button type="submit" value="Save" class="btn btn-primary">Save</button>
 </form>

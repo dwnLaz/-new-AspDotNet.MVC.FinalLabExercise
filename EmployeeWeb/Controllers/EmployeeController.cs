@@ -8,11 +8,18 @@ namespace EmployeeWeb.Controllers
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository employeeRepository;
+        private readonly ISkillRepository skillRepository;
+        private readonly IEmployeeSkillRepository employeeSkillRepository;
         private readonly IEmployeeService employeeService;
 
-        public EmployeeController(IEmployeeRepository employeeRepository, IEmployeeService employeeService)
+        public EmployeeController(IEmployeeRepository employeeRepository, 
+            IEmployeeService employeeService,
+            ISkillRepository skillRepository,
+            IEmployeeSkillRepository employeeSkillRepository)
         {
             this.employeeRepository = employeeRepository;
+            this.employeeSkillRepository = employeeSkillRepository;
+            this.skillRepository = skillRepository;
             this.employeeService = employeeService;
         }
 
@@ -35,17 +42,8 @@ namespace EmployeeWeb.Controllers
             ViewBag.skills = this.employeeRepository.GetSkills(id);
             return View("Form", employee);
         }
-
-        public IActionResult Delete(int id, int page)
-        {
-            var employee = this.employeeRepository.FindByPrimaryKey(id);
-            employee.Active = false;
-            employeeRepository.Update(employee);
-            employeeRepository.Save();
-            return RedirectToAction("Index", new { page = page });
-        }
-        public IActionResult Save(string action, Employee employee)
-        {
+        public IActionResult Save(string action, Employee employee, string? addSkill)
+        {            
             if (ModelState.IsValid)
             {
                 if (action.ToLower().Equals("new"))
@@ -55,13 +53,31 @@ namespace EmployeeWeb.Controllers
                 }
                 else if (action.ToLower().Equals("edit"))
                 {
+                    if (!string.IsNullOrEmpty(addSkill))
+                    {
+                        var skill = new Skill
+                        {
+                            Description = addSkill,
+                        };
+                        Skill addedSkill = skillRepository.Insert(skill);
+                        skillRepository.Save();
+                        var employeeSkill = new EmployeeSkill
+                        {
+                            EmployeeId = employee.EmployeeId,
+                            SkillId = addedSkill.SkillId
+                        };
+                        employeeSkillRepository.Insert(employeeSkill);
+                        employeeSkillRepository.Save();
+                    }                    
                     employeeRepository.Update(employee);
+                    //return RedirectToAction("Edit", new { id = employee.EmployeeId });
                 }
                 employeeRepository.Save();
                 return RedirectToAction("Index");
             }
             else
             {
+                ViewData["Action"] = action;
                 return View("Form", employee);
             }
         }
