@@ -21,6 +21,7 @@ namespace EmployeeWeb.Controllers
             //var employeeList = this.employeeRepository.FindAll();
             return View(employeeService.GetEmployeePage(page));
         }
+
         public IActionResult New()
         {
             ViewData["Action"] = "New";
