@@ -31,9 +31,17 @@
             <span asp-validation-for="HomePhone"></span>
         </div>
     </div>
-    <input asp-for="Active" class="form-control" type="hidden"/>    
-    <label for="addSkill">Add Skill:</label>
+    <input asp-for="Active" class="form-control" type="hidden"/>  
+    <div class="row mb-3">
+        <label for="AddSkill" class="col-sm-2 col-form-label">Add</label>
+        <div class="col-sm-10">
+            <input type="text" id="addSkill" name="addSkill">
+            <button value="Add"  class="btn btn-primary" asp-action="AddNewSkill">Add Skill</button>
+        </div>
+    </div>
+@*    <label for="addSkill">Add Skill:</label>
     <input type="text" id="addSkill" name="addSkill">
+    <button value="Add"  class="btn btn-primary" asp-action="AddNewSkill">Add Skill</button>*@
     <br/>
     <br/>
     <button type="submit" value="Save" class="btn btn-primary">Save</button>
@@ -53,5 +61,4 @@
             }
         </table>
     }
-
 </form>
