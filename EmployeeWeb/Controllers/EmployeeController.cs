@@ -21,6 +21,11 @@ namespace EmployeeWeb.Controllers
             //var employeeList = this.employeeRepository.FindAll();
             return View(employeeService.GetEmployeePage(page));
         }
+        public IActionResult New()
+        {
+            ViewData["Action"] = "New";
+            return View("Form", new Employee());
+        }
 
         public IActionResult Edit(int id)
         {
@@ -43,6 +48,7 @@ namespace EmployeeWeb.Controllers
             {
                 if (action.ToLower().Equals("new"))
                 {
+                    employee.Active = true;
                     employeeRepository.Insert(employee);
                 }
                 else if (action.ToLower().Equals("edit"))
