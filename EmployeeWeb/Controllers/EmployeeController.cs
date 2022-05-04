@@ -42,7 +42,14 @@ namespace EmployeeWeb.Controllers
             ViewBag.skills = this.employeeRepository.GetSkills(id);
             return View("Form", employee);
         }
-        public IActionResult Save(string action, Employee employee, string? addSkill)
+        public IActionResult Delete(int id, int page)
+        {
+            var employee = this.employeeRepository.FindByPrimaryKey(id);
+            employee.Active = false;
+            employeeRepository.Update(employee);
+            return RedirectToAction("Index", new { page = page });
+        }
+        public IActionResult Save(string action, Employee employee)
         {            
             if (ModelState.IsValid)
             {
