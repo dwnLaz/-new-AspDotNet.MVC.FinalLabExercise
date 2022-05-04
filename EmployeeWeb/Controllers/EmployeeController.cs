@@ -32,6 +32,7 @@ namespace EmployeeWeb.Controllers
         {
             ViewData["Action"] = "Edit";
             var employee = this.employeeRepository.FindByPrimaryKey(id);
+            ViewBag.skills = this.employeeRepository.GetSkills(id);
             return View("Form", employee);
         }
 

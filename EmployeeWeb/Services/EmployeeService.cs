@@ -23,7 +23,7 @@ namespace EmployeeWeb.Services
 
         public PagedResult<Employee> GetEmployeePage(int currentPage)
         {
-            return GetPaged<Employee>(employeeRepository.Context.Employees.Where(e => e.Active.Equals(true)), currentPage, 5);
+            return GetPaged<Employee>(employeeRepository.Context.Employees.Where(e => e.Active.Equals(true)), currentPage, 10);
         }
     }
 }
