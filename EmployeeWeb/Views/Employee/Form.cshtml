@@ -53,11 +53,14 @@
                         <th>Skills</th>
                         <th></th>
                     </tr>
-                    @foreach(EmployeeSkillDTO skill in ViewBag.Skills)
+                    @if(ViewBag.Skills != null)
                     {
-                        <tr>
-                            <td>@skill.Description</td>
-                        </tr>
+                        @foreach(EmployeeSkillDTO skill in ViewBag.skills)
+                        {
+                            <tr>
+                                <td>@skill.Description</td>
+                            </tr>
+                        }
                     }
                 </table>
             }
