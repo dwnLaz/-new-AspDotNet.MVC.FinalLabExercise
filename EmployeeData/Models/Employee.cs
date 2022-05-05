@@ -31,7 +31,7 @@ namespace EmployeeData.Models
         public string LastName { get; set; }
         [Required]
         [StringLength(12, ErrorMessage = "Phone must not exceed 12 characters")]
-        [RegularExpression("([0-9 ]+))", ErrorMessage = "Phone must only contain numbers")]
+        [RegularExpression("([0-9 ]+)", ErrorMessage = "Phone must only contain numbers")]
         public string HomePhone { get; set; }
         public bool Active { get; set; }
 
