@@ -25,7 +25,6 @@ namespace EmployeeWeb.Controllers
 
         public IActionResult Index(int page = 1)
         {
-            //var employeeList = this.employeeRepository.FindAll();
             return View(employeeService.GetEmployeePage(page));
         }
 
@@ -73,22 +72,6 @@ namespace EmployeeWeb.Controllers
                 return View("Form", employee);
             }
         }
-        //public IActionResult AddNewSkill(int employeeId, int skillId)
-        //{
-
-        //    var employeeSkill = new EmployeeSkill
-        //    {
-        //        EmployeeId = employeeId,
-        //        SkillId = skillId
-        //    };
-        //    employeeSkillRepository.Insert(employeeSkill);
-
-        //    ViewData["Action"] = "Edit";
-        //    var entity = this.employeeRepository.FindByPrimaryKey(employeeId);
-        //    ViewBag.existingSkills = this.skillRepository.FindAll();
-        //    ViewBag.skills = this.employeeRepository.GetSkills(employeeId);
-        //    return View("Form", entity);
-        //}
 
         public IActionResult AddNewSkill(string action, Employee employee, int addSkill)
         {
@@ -99,7 +82,6 @@ namespace EmployeeWeb.Controllers
                 };
                 employeeSkillRepository.Insert(employeeSkill);
             
-            //return RedirectToAction("Edit", new { id = employee.EmployeeId });
             ViewData["Action"] = "Edit";
             ViewBag.existingSkills = this.skillRepository.FindAll();
             var entity = this.employeeRepository.FindByPrimaryKey(employee.EmployeeId);

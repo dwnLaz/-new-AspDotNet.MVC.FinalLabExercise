@@ -29,11 +29,6 @@ namespace EmployeeWeb
         {
             services.AddControllersWithViews();
 
-            services.AddSession(options =>
-            {
-                options.IdleTimeout = TimeSpan.FromMinutes(30);
-            });
-
             var connectionString = Configuration.GetValue<string>("ConnectionString");
             services.AddDbContext<EmployeeDbContext>(options => options.UseSqlServer(connectionString));
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
@@ -62,7 +57,6 @@ namespace EmployeeWeb
 
             app.UseAuthorization();
 
-            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
