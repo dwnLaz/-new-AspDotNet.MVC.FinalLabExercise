@@ -22,7 +22,7 @@ namespace EmployeeData.Models
         [Required]
         [StringLength(50, ErrorMessage = "First name length must not exceed 50 characters")]
         [MinLength(2, ErrorMessage = "First Name should contain atleast 2 characters")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "First name must not contain special characters")]
+        [RegularExpression(@"^[A-Za-z ]+$", ErrorMessage = "First name must not contain special characters")]
         public string FirstName { get; set; }
         [Required]
         [StringLength(50, ErrorMessage = "Last name length must not exceed 50 characters")]
@@ -31,7 +31,7 @@ namespace EmployeeData.Models
         public string LastName { get; set; }
         [Required]
         [StringLength(12, ErrorMessage = "Phone must not exceed 12 characters")]
-        [RegularExpression("([0-9]+)", ErrorMessage = "Phone must only contain numbers")]
+        [RegularExpression("([0-9 ]+))", ErrorMessage = "Phone must only contain numbers")]
         public string HomePhone { get; set; }
         public bool Active { get; set; }
 
