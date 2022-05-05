@@ -27,7 +27,7 @@ namespace EmployeeData.Models
         [Required]
         [StringLength(50, ErrorMessage = "Last name length must not exceed 50 characters")]
         [MinLength(2, ErrorMessage = "Last Name should contain atleast 2 characters")]
-        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Last name must not contain special characters")]
+        [RegularExpression(@"^[a-zA-Z ]+$", ErrorMessage = "Last name must not contain special characters")]
         public string LastName { get; set; }
         [Required]
         [StringLength(12, ErrorMessage = "Phone must not exceed 12 characters")]
