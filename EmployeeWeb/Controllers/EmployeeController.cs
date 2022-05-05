@@ -67,6 +67,7 @@ namespace EmployeeWeb.Controllers
             else
             {
                 ViewData["Action"] = action;
+                ViewBag.skills = this.employeeRepository.GetSkills(employee.EmployeeId);
                 return View("Form", employee);
             }
         }
