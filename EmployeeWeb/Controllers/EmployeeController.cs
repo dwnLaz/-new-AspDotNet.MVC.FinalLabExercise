@@ -73,45 +73,38 @@ namespace EmployeeWeb.Controllers
                 return View("Form", employee);
             }
         }
-        public IActionResult AddNewSkill(int employeeId, int skillId)
-        {
-
-            var employeeSkill = new EmployeeSkill
-            {
-                EmployeeId = employeeId,
-                SkillId = skillId
-            };
-            employeeSkillRepository.Insert(employeeSkill);
-
-            ViewData["Action"] = "Edit";
-            var entity = this.employeeRepository.FindByPrimaryKey(employeeId);
-            ViewBag.existingSkills = this.skillRepository.FindAll();
-            ViewBag.skills = this.employeeRepository.GetSkills(employeeId);
-            return View("Form", entity);
-        }
-
-        //public IActionResult AddNewSkill(string action, Employee employee, string? addSkill)
+        //public IActionResult AddNewSkill(int employeeId, int skillId)
         //{
 
-        //    if (!string.IsNullOrEmpty(addSkill))
+        //    var employeeSkill = new EmployeeSkill
         //    {
-        //        var skill = new Skill
-        //        {
-        //            Description = addSkill,
-        //        };
-        //        Skill addedSkill = skillRepository.Insert(skill);
-        //        var employeeSkill = new EmployeeSkill
-        //        {
-        //            EmployeeId = employee.EmployeeId,
-        //            SkillId = addedSkill.SkillId
-        //        };
-        //        employeeSkillRepository.Insert(employeeSkill);
-        //    }
-        //    //return RedirectToAction("Edit", new { id = employee.EmployeeId });
+        //        EmployeeId = employeeId,
+        //        SkillId = skillId
+        //    };
+        //    employeeSkillRepository.Insert(employeeSkill);
+
         //    ViewData["Action"] = "Edit";
-        //    var entity = this.employeeRepository.FindByPrimaryKey(employee.EmployeeId);
-        //    ViewBag.skills = this.employeeRepository.GetSkills(employee.EmployeeId);
+        //    var entity = this.employeeRepository.FindByPrimaryKey(employeeId);
+        //    ViewBag.existingSkills = this.skillRepository.FindAll();
+        //    ViewBag.skills = this.employeeRepository.GetSkills(employeeId);
         //    return View("Form", entity);
         //}
+
+        public IActionResult AddNewSkill(string action, Employee employee, int addSkill)
+        {
+                var employeeSkill = new EmployeeSkill
+                {
+                    EmployeeId = employee.EmployeeId,
+                    SkillId = addSkill
+                };
+                employeeSkillRepository.Insert(employeeSkill);
+            
+            //return RedirectToAction("Edit", new { id = employee.EmployeeId });
+            ViewData["Action"] = "Edit";
+            ViewBag.existingSkills = this.skillRepository.FindAll();
+            var entity = this.employeeRepository.FindByPrimaryKey(employee.EmployeeId);
+            ViewBag.skills = this.employeeRepository.GetSkills(employee.EmployeeId);
+            return View("Form", entity);
+        }
     }
 }

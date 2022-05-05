@@ -59,11 +59,13 @@
                         {
                             @foreach(Skill skill in ViewBag.existingSkills)
                                 {
+
+                                    <button class="btn btn-primary btn-sm m-1" value="@skill.SkillId" id="addSkill" name="addSkill"  asp-action="AddNewSkill">@skill.Description</button>
                                     @*@if(Model.EmployeeId != skill.EmployeeId)
                                     {
                                         <span class="dropdown-item">@Html.ActionLink(skill.Description, "AddSkill", new { employeeId = Model.EmployeeId, skillId = skill.SkillId})</span>
                                     }   *@                         
-                                     <span class="dropdown-item">@Html.ActionLink(skill.Description, "AddNewSkill", new { employeeId = Model.EmployeeId, skillId = skill.SkillId})</span>
+                                     @*<span class="dropdown-item">@Html.ActionLink(skill.Description, "AddNewSkill", new { employeeId = Model.EmployeeId, skillId = skill.SkillId})</span>*@
                                 }
                         }
                     </div>
