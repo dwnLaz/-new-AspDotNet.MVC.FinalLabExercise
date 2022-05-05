@@ -1,5 +1,6 @@
 ﻿@using EmployeeData.DataObjectTransfer
-@model EmployeeData.Models.Employee
+@using EmployeeData.Models
+@model Employee
 
 @{
     var action = ViewData["Action"];
@@ -35,19 +36,38 @@
                 </div>
             </div>
             <input asp-for="Active" class="form-control" type="hidden"/>  
-            <div class="row mb-3">
+            @*<div class="row mb-3">
                 <label for="AddSkill" class="col-sm-2 col-form-label">New Skill</label>
                 <div class="col-sm-10">
                     <input type="text" id="addSkill" name="addSkill">
                     <button value="Add"  class="btn btn-primary" asp-action="AddNewSkill">Add Skill</button>
                 </div>
-            </div>
+            </div>*@
             <br/>
             <button type="submit" value="Save" class="btn btn-primary">Save</button>
         </div>
         <div class="col">
             @if (action != null && action.ToString().ToLower().Equals("edit"))
-            {        
+            {      
+                
+                <div class="dropdown">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add Skills
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      @if(ViewBag.existingSkills != null)
+                        {
+                            @foreach(Skill skill in ViewBag.existingSkills)
+                                {
+                                    @*@if(Model.EmployeeId != skill.EmployeeId)
+                                    {
+                                        <span class="dropdown-item">@Html.ActionLink(skill.Description, "AddSkill", new { employeeId = Model.EmployeeId, skillId = skill.SkillId})</span>
+                                    }   *@                         
+                                     <span class="dropdown-item">@Html.ActionLink(skill.Description, "AddNewSkill", new { employeeId = Model.EmployeeId, skillId = skill.SkillId})</span>
+                                }
+                        }
+                    </div>
+                </div>
                 <table class="table">
                     <tr>
                         <th>Skills</th>
