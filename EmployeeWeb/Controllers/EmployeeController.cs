@@ -88,7 +88,11 @@ namespace EmployeeWeb.Controllers
                 };
                 employeeSkillRepository.Insert(employeeSkill);
             }
-            return RedirectToAction("Edit", new { id = employee.EmployeeId });
+            //return RedirectToAction("Edit", new { id = employee.EmployeeId });
+            ViewData["Action"] = "Edit";
+            var entity = this.employeeRepository.FindByPrimaryKey(employee.EmployeeId);
+            ViewBag.skills = this.employeeRepository.GetSkills(employee.EmployeeId);
+            return View("Form", entity);
         }
     }
 }
